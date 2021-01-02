@@ -8,7 +8,7 @@ const web3 = new Web3(provider);
 const {abi, evm} = require('../compile');
 
 let fetchedAccts;
-let inbox='abc';
+let inbox='abcxyz';
 
 beforeEach(async () => {
     //get the list of all accounts
