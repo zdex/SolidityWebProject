@@ -1,7 +1,7 @@
 const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3'); //W  is in capital bcoz we are going to create the instances of web3 lib and it will call constructor of web3
-//const web3 = new Web3(ganache.provider()); // webw with small w is instance and Web3 with capital W is class &&
+//const web3 = new Web3(ganache.provider()); // web3 with small w is instance and Web3 with capital W is class &&
                                             // ganache.provider() is the provider to intract with web3 instance
 const provider = ganache.provider();
 const web3 = new Web3(provider);                                            
@@ -27,14 +27,20 @@ beforeEach(async () => {
       console.log(evm['bytecode']);*/
     //use one of those accounts to deploy contract
 
-    inbox = new web3.eth.Contract(abi)
-   .deploy({data: evm['bytecode'], arguments: ['Hi there!']});
+    inbox = await new web3.eth.Contract(abi)
+   .deploy({data: "0x" + evm['bytecode'].object, arguments: ['Hi there']})
+   .send(
+       {
+           from: fetchedAccts[0],
+           gas: 1000000
+       }
+   );
     
-   inbox.send({ from: fetchedAccts[0],
+  /* inbox.send({ from: fetchedAccts[0],
         gas: 1500000,
         gasPrice: '30000000000000'}).then(function(newContractInstance) {
             console.log(newContractInstance.options.address);
-        });
+        }); */
 });
 
 describe('Inbox', () => {

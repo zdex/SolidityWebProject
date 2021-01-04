@@ -24,6 +24,7 @@ var input = {
     }
 }; 
 
+//console.log(JSON.parse(solc.compile(JSON.stringify(input))).contracts['Inbox.sol']);
 console.log('Interface : abi is: ');
 //console.log(JSON.parse(solc.compile(JSON.stringify(input))).contracts['Inbox.sol']['Inbox']['abi']);
 console.log('Bytecode is: ');
