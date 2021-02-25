@@ -45,6 +45,23 @@ beforeEach(async () => {
 
 describe('Inbox', () => {
     it('deploy the contract', () => {
-        console.log(inbox);
+        console.log(inbox.options.address);
+        assert.ok(inbox.options.address);
+    })
+    it('initial value', async () => {
+        const msg = await inbox.methods.message().call();
+        console.log("msg: " + msg);
+        assert.equal('Hi there', msg);
+    })
+
+    it('set message value', async () => {
+        await inbox.methods.setMessage("Hello Gaurav").send({
+            from: fetchedAccts[0],
+            gas: 1000000
+        });
+
+        const msg = await inbox.methods.message().call();
+        console.log("new msg: " + msg);
+        assert.equal('Hello Gaurav', msg);
     })
 });
